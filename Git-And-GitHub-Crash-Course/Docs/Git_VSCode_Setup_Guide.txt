@@ -1,0 +1,83 @@
+
+## Git & VS Code Setup Guide (Mac)
+
+### 🔧 Git Installation & Configuration
+
+#### 1. Check if Git is Installed
+git --version
+
+#### 2. Install Git (If Not Present)
+- Via Homebrew:
+brew install git
+- Or via Xcode Command Line Tools:
+xcode-select --install
+
+#### 3. Global Git Configurations
+git config --global user.name "Your Full Name"
+git config --global user.email "your.email@example.com"
+git config --global init.defaultBranch main
+git config --global core.editor "code --wait"
+git config --global credential.helper osxkeychain
+
+#### 4. View Configuration
+git config --list
+
+### 🔐 SSH Key Setup for GitHub
+ssh-keygen -t ed25519 -C "your.email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+pbcopy < ~/.ssh/id_ed25519.pub
+
+Paste SSH key into GitHub:
+GitHub → Settings → SSH and GPG keys → New SSH Key
+
+#### Test SSH Connection
+ssh -T git@github.com
+
+---
+
+## 💻 VS Code Configuration
+
+### Verify Git Availability
+git --version
+
+### Recommended VS Code Settings (settings.json)
+{
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.decorations.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.hovers.currentLine.over": "line"
+}
+
+---
+
+## 🔌 Useful VS Code Extensions
+
+| Extension | Use Case |
+|-----------|----------|
+| GitLens | Git history, blame, annotations |
+| GitHub Pull Requests & Issues | PRs and issues in-editor |
+| Git Graph | Visual branch/commit graph |
+| Git History | View commits & diff history |
+| Markdown All in One | README.md editing |
+| YAML | Workflow syntax highlighting |
+| GitHub Actions | IntelliSense & lint for Actions |
+| Prettier | Code formatting |
+| Code Spell Checker | Detect typos in commits/docs |
+
+---
+
+## 👀 Show Hidden Files in Finder (Mac)
+
+### Toggle Hidden Files (Shortcut)
+Cmd (⌘) + Shift (⇧) + .
+
+### Permanently Show via Terminal
+defaults write com.apple.finder AppleShowAllFiles -bool true
+killall Finder
+
+### Revert
+defaults write com.apple.finder AppleShowAllFiles -bool false
+killall Finder
